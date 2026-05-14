@@ -60,8 +60,8 @@ public class Window extends JFrame
         setLayout(new BorderLayout());
         
         container.add(welcome(), "Welcome");
-        container.add(new LocateCar(this), "LocateCar");
-        container.add(new LocateServices(this), "LocateServices");
+        container.add(new CrudVehicles(this), "LocateCar");
+        container.add(new CrudServices(this), "LocateServices");
         container.add(new Compare(this), "Compare");
         container.add(new FreeVehicle(this), "FreeVehicle");      
         

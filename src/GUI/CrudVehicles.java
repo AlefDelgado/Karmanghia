@@ -47,7 +47,9 @@ public class CrudVehicles extends JPanel
         int fila = 0;
         gbc.gridx = 0; gbc.gridy = fila;
         panel.add(new JLabel("Placas"), gbc);
-        gbc.
+        
+        fila++;
+        gbc.gridx = 0;
         
         return panel;
     }

@@ -62,6 +62,8 @@ public class Window extends JFrame
         container.add(welcome(), "Welcome");
         container.add(new CrudVehicles(this), "LocateCar");
         container.add(new CrudServices(this), "LocateServices");
+        container.add(new LocateCar(this), "LocateCar");
+        container.add(new LocateServices(this), "LocateServices");
         container.add(new Compare(this), "Compare");
         container.add(new FreeVehicle(this), "FreeVehicle");      
         
@@ -96,8 +98,7 @@ public class Window extends JFrame
         buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 50));
         buttons.setBackground(ocean);
         buttons.setPreferredSize(new Dimension(250, 0));
-        
-        JButton locateCarbtn = new JButton("Vehículos");
+        JButton locateCarbtn = new JButton("Vehiculos");
         locateCarbtn.setBackground(mist);
         locateCarbtn.setPreferredSize(new Dimension(200, 90));
         locateCarbtn.addActionListener(e -> 

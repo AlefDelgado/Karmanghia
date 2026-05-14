@@ -97,7 +97,7 @@ public class Window extends JFrame
         buttons.setBackground(ocean);
         buttons.setPreferredSize(new Dimension(250, 0));
         
-        JButton locateCarbtn = new JButton("Vehiculos");
+        JButton locateCarbtn = new JButton("Vehículos");
         locateCarbtn.setBackground(mist);
         locateCarbtn.setPreferredSize(new Dimension(200, 90));
         locateCarbtn.addActionListener(e -> 
@@ -121,7 +121,7 @@ public class Window extends JFrame
             mostrar("Compare");
         });
         
-        JButton releasebtn = new JButton("Liberar Vehiculos (fecha)");
+        JButton releasebtn = new JButton("Liberar Vehículos (fecha)");
         releasebtn.setBackground(mist);
         releasebtn.setPreferredSize(new Dimension(200, 90));
         releasebtn.addActionListener(e -> 
@@ -175,7 +175,7 @@ public class Window extends JFrame
         switch (name)
         {
             case "LocateCar":
-                titulo.setText("Vehiculos");
+                titulo.setText("Vehículos");
                 break;
             case "LocateServices":
                 titulo.setText("Servicios");

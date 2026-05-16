@@ -61,9 +61,7 @@ public class Window extends JFrame
         
         container.add(welcome(), "Welcome");
         container.add(new CrudVehicles(this), "LocateCar");
-        container.add(new CrudServices(this), "LocateServices");
-        container.add(new LocateCar(this), "LocateCar");
-        container.add(new LocateServices(this), "LocateServices");
+        container.add(new CrudConcessionarys(this), "LocateServices");
         container.add(new Compare(this), "Compare");
         container.add(new FreeVehicle(this), "FreeVehicle");      
         
@@ -106,7 +104,7 @@ public class Window extends JFrame
             mostrar("LocateCar");
         });
         
-        JButton locateServicebtn = new JButton("Servicios");
+        JButton locateServicebtn = new JButton("Sucursales");
         locateServicebtn.setBackground(mist);
         locateServicebtn.setPreferredSize(new Dimension(200, 90));
         locateServicebtn.addActionListener(e -> 

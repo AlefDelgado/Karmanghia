@@ -25,6 +25,7 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import poo.Archivos;
 
 /**
  *
@@ -32,6 +33,20 @@ import javax.swing.SpinnerNumberModel;
  */
 public class CrudVehicles extends JPanel
 {
+    Brand[] marcas =
+    {
+        new Brand("Ford"),
+        new Brand("VolksWagen"),
+        new Brand("Mercedes Benz"),
+        new Brand("Toyota"),
+        new Brand("Otra")
+    };
+        
+    Services[] servicios =
+    {
+        new Services("Pintura", 8500.75, 200),
+        new Services("Otro", 0, 0)
+    };    
 
     private final Window ventana;
 
@@ -59,21 +74,6 @@ public class CrudVehicles extends JPanel
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
-
-        Brand[] marcas =
-        {
-            new Brand("Ford"),
-            new Brand("VolksWagen"),
-            new Brand("Mercedes Benz"),
-            new Brand("Toyota"),
-            new Brand("Otra")
-        };
-        
-        Services[] servicios =
-        {
-            new Services("Pintura", 8500.75, 200),
-            new Services("Otro", 0, 0)
-        };
 
         int fila = 0;
         gbc.gridx = 0;
@@ -309,4 +309,5 @@ public class CrudVehicles extends JPanel
         
         return panel;
     }
+
 }

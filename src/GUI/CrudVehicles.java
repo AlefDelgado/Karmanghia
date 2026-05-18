@@ -1,8 +1,13 @@
 package GUI;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import CONTROL.Brand;
+import CONTROL.Car;
 import CONTROL.Services;
 import ESTRUCTURAS.Lista;
+import ESTRUCTURAS.Nodo25;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import GUI.Window;
@@ -12,6 +17,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.BorderFactory;
@@ -33,6 +40,7 @@ import poo.Archivos;
  */
 public class CrudVehicles extends JPanel
 {
+
     Brand[] marcas =
     {
         new Brand("Ford"),
@@ -41,12 +49,12 @@ public class CrudVehicles extends JPanel
         new Brand("Toyota"),
         new Brand("Otra")
     };
-        
+
     Services[] servicios =
     {
         new Services("Pintura", 8500.75, 200),
         new Services("Otro", 0, 0)
-    };    
+    };
 
     private final Window ventana;
 
@@ -85,14 +93,14 @@ public class CrudVehicles extends JPanel
         JComboBox<Brand> marca = new JComboBox<>(marcas);
         marca.setPreferredSize(new Dimension(200, 20));
         panel.add(marca, gbc);
-        
+
         fila++;
         gbc.gridx = 0;
         gbc.gridy = fila;
         JLabel otroLbl = new JLabel("Especifique: ");
         otroLbl.setVisible(false);
         panel.add(otroLbl, gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = fila;
         JTextField newBrand = new JTextField(20);
@@ -103,10 +111,10 @@ public class CrudVehicles extends JPanel
         {
             Brand selection = (Brand) marca.getSelectedItem();
             boolean esOtro = selection.getNom().equals("Otra");
-            
+
             otroLbl.setVisible(esOtro);
             newBrand.setVisible(esOtro);
-            
+
             marca.getParent().revalidate();
             marca.getParent().repaint();
         });
@@ -120,12 +128,12 @@ public class CrudVehicles extends JPanel
         gbc.gridy = fila;
         JTextField Modelo = new JTextField(20);
         panel.add(Modelo, gbc);
-        
+
         fila++;
         gbc.gridx = 0;
         gbc.gridy = fila;
         panel.add(new JLabel("Año: "), gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = fila;
         JSpinner anio = new JSpinner(new SpinnerNumberModel(2026, 1886, 2027, 1));
@@ -140,46 +148,44 @@ public class CrudVehicles extends JPanel
         gbc.gridy = fila;
         JTextField placas = new JTextField(20);
         panel.add(placas, gbc);
-        
+
         fila++;
         gbc.gridx = 0;
         gbc.gridy = fila;
         panel.add(new JLabel("Servicio: "), gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = fila;
         JComboBox<Services> servicio = new JComboBox<>(servicios);
         servicio.setPreferredSize(new Dimension(200, 20));
         panel.add(servicio, gbc);
-        
+
         fila++;
         gbc.gridx = 0;
         gbc.gridy = fila;
         JLabel insertService = new JLabel("Especifique: ");
         insertService.setVisible(false);
         panel.add(insertService, gbc);
-        
+
         gbc.gridx = 1;
-        gbc.gridy =  fila;
+        gbc.gridy = fila;
         JTextField newService = new JTextField(20);
         newService.setVisible(false);
         panel.add(newService, gbc);
-        
-        
+
         servicio.addActionListener(e ->
         {
             Services selected = (Services) servicio.getSelectedItem();
             boolean esOtro = selected.getNom().equals("Otro");
-            
+
             insertService.setVisible(esOtro);
             newService.setVisible(esOtro);
-            
+
             servicio.getParent().revalidate();
             servicio.getParent().repaint();
-            
+
         });
-        
-        
+
         fila++;
         gbc.gridx = 0;
         gbc.gridy = fila;
@@ -196,7 +202,7 @@ public class CrudVehicles extends JPanel
 
         JSpinner fecha = new JSpinner(fechador);
         panel.add(fecha, gbc);
-        
+
         fila++;
         gbc.gridx = 0;
         gbc.gridy = fila;
@@ -206,11 +212,29 @@ public class CrudVehicles extends JPanel
         registrar.setBorderPainted(false);
         registrar.setFocusPainted(false);
         registrar.setForeground(Window.mist);
+        registrar.addActionListener(e ->
+        {
+            CONTROL.Car carro = new Car(placas.getText(), Modelo.getText(), (int) anio.getValue(), (Date) fecha.getValue());
+            Nodo25 n=new Nodo25(carro.getPlacas(), carro);
+            Path ruta = Paths.get("dataBase.dat");
+
+            // Files.exists evalúa si el archivo realmente está ahí
+            if (Files.exists(ruta) && !Files.isDirectory(ruta))
+            {
+                ESTRUCTURAS.MultiLista multilista = (ESTRUCTURAS.MultiLista) Archivos.carga("dataBase.dat");
+                String concesionarios[]={"Ciudad","Marca","Sucursal","Carro"};
+                //multilista.inserta(n, concesionarias, 0, service);
+            } else
+            {
+                System.out.println("El archivo no existe o es un directorio.");
+            }
+            System.out.println("¡Has dado de alta un auto! con placas " + carro.getPlacas());
+        });
         panel.add(registrar, gbc);
-        
+
         return panel;
     }
-    
+
     public JPanel createPanelDelete()
     {
         JPanel panel = new JPanel();
@@ -219,16 +243,16 @@ public class CrudVehicles extends JPanel
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
-        
+
         int fila = 0;
         gbc.gridx = 0;
-        gbc.gridy =  fila;
+        gbc.gridy = fila;
         panel.add(new JLabel("Placas: "));
-        
+
         gbc.gridx = 1;
         JTextField placa = new JTextField(20);
         panel.add(placa, gbc);
-        
+
         fila++;
         gbc.gridx = 0;
         gbc.gridy = fila;
@@ -239,11 +263,10 @@ public class CrudVehicles extends JPanel
         eliminar.setFocusPainted(false);
         eliminar.setForeground(Window.mist);
         panel.add(eliminar, gbc);
-        
-        
+
         return panel;
     }
-    
+
     public JPanel createPanelFind()
     {
         JPanel panel = new JPanel();
@@ -252,16 +275,16 @@ public class CrudVehicles extends JPanel
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
-        
+
         int fila = 0;
         gbc.gridx = 0;
-        gbc.gridy =  fila;
+        gbc.gridy = fila;
         panel.add(new JLabel("Placas: "));
-        
+
         gbc.gridx = 1;
         JTextField placa = new JTextField(20);
         panel.add(placa, gbc);
-        
+
         fila++;
         gbc.gridx = 0;
         gbc.gridy = fila;
@@ -272,11 +295,10 @@ public class CrudVehicles extends JPanel
         eliminar.setFocusPainted(false);
         eliminar.setForeground(Window.mist);
         panel.add(eliminar, gbc);
-        
-        
+
         return panel;
     }
-    
+
     public JPanel createPanelEdit()
     {
         JPanel panel = new JPanel();
@@ -285,16 +307,16 @@ public class CrudVehicles extends JPanel
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
-        
+
         int fila = 0;
         gbc.gridx = 0;
-        gbc.gridy =  fila;
+        gbc.gridy = fila;
         panel.add(new JLabel("Placas: "));
-        
+
         gbc.gridx = 1;
         JTextField placa = new JTextField(20);
         panel.add(placa, gbc);
-        
+
         fila++;
         gbc.gridx = 0;
         gbc.gridy = fila;
@@ -305,8 +327,7 @@ public class CrudVehicles extends JPanel
         eliminar.setFocusPainted(false);
         eliminar.setForeground(Window.mist);
         panel.add(eliminar, gbc);
-        
-        
+
         return panel;
     }
 

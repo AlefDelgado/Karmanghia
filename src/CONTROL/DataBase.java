@@ -17,5 +17,8 @@ public class DataBase implements Serializable
         Archivos.guarda(dataBase, "dataBase.dat");
         
     }
-       
+    public DataBase(MultiLista ml)
+    {
+        Archivos.guarda(ml, "dataBase.dat");
+    }
 }

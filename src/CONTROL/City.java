@@ -8,7 +8,7 @@ package CONTROL;
  *
  * @author alefdelgado
  */
-public class City
+public class City implements java.io.Serializable
 {
     String nom;
 

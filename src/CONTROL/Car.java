@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Car
 {
-    String placas;
+    private String placas;
     String modelo;
     int anio;
     Date fechaIngreso;
@@ -23,6 +23,14 @@ public class Car
         this.modelo = modelo;
         this.anio = anio;
         this.fechaIngreso = fechaIngreso;
+    }
+
+    /**
+     * @return the placas
+     */
+    public String getPlacas()
+    {
+        return placas;
     }
 
     

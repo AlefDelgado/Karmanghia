@@ -4,7 +4,7 @@ package CONTROL;
  *
  * @author alefdelgado
  */
-public class Brand
+public class Brand implements java.io.Serializable
 {
     String nom;
 

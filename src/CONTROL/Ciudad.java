@@ -1,14 +1,20 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package CONTROL;
+
+import java.io.Serializable;
 
 /**
  *
  * @author alefdelgado
  */
-public class Brand
+public class Ciudad implements Serializable
 {
     String nom;
 
-    public Brand(String nom)
+    public Ciudad(String nom)
     {
         this.nom = nom;
     }

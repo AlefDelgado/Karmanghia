@@ -1,20 +1,22 @@
 package CONTROL;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alefdelgado
  */
-public class Services
+public class Servicio implements Serializable
 {
     String nom;
     double precio;
     int capacidad;
 
-    public Services()
+    public Servicio()
     {
     }
 
-    public Services(String nom, double precio, int capacidad)
+    public Servicio(String nom, double precio, int capacidad)
     {
         this.nom = nom;
         this.precio = precio;
